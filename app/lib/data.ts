@@ -1,14 +1,11 @@
+
+
+
 import { sql } from '@vercel/postgres';
-import {
-  CustomerField,
-  CustomersTableType,
-  InvoiceForm,
-  InvoicesTable,
-  LatestInvoiceRaw,
-  User,
-  Revenue,
-} from './definitions';
+import { CustomerField, CustomersTableType, InvoiceForm, InvoicesTable, LatestInvoiceRaw, User, Revenue} from './definitions';
 import { formatCurrency } from './utils';
+
+
 
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
@@ -46,7 +43,8 @@ export async function fetchLatestInvoices() {
       amount: formatCurrency(invoice.amount),
     }));
     return latestInvoices;
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
   }
@@ -64,6 +62,7 @@ export async function fetchCardData() {
          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
          FROM invoices`;
 
+    // Data fetching in parallel
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise,
@@ -81,7 +80,8 @@ export async function fetchCardData() {
       totalPaidInvoices,
       totalPendingInvoices,
     };
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch card data.');
   }
