@@ -91,6 +91,7 @@ export async function fetchCardData() {
   }
 }
 
+
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
@@ -172,6 +173,7 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
+    console.log(invoice); // invoice is an empty array[]
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);

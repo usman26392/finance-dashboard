@@ -1,5 +1,10 @@
-// This file contains placeholder data that you'll be replacing with real data in the Data Fetching chapter:
+// This file contains 'placeholder data' that you'll be 'replacing' with 'real data' in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
+
+
+
+// Each JavaScript object in the file represents a table in your database
+
 const users = [
   {
     id: '410544b2-4001-4271-9855-fec4b6a6442a',
@@ -8,6 +13,8 @@ const users = [
     password: '123456',
   },
 ];
+
+
 
 const customers = [
   {
@@ -71,6 +78,8 @@ const customers = [
     image_url: '/customers/balazs-orban.png',
   },
 ];
+
+
 
 const invoices = [
   {

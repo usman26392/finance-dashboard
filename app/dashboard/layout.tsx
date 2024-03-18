@@ -1,7 +1,7 @@
 import SideNav from '../ui/dashboard/sidenav';
 
-
-// This layout component will be 'shared layout component' for dashboard pages.
+// This layout component will be 'shared layout component' for dashboard pages
+//  or for dashboard routes.
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
@@ -12,4 +12,3 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     </div>
   );
 }
-
