@@ -2,7 +2,12 @@
 
 
 import { sql } from '@vercel/postgres';
-import { CustomerField, CustomersTableType, InvoiceForm, InvoicesTable, LatestInvoiceRaw, User, Revenue} from './definitions';
+import { 
+  CustomerField, 
+  CustomersTableType, 
+  InvoiceForm, 
+  InvoicesTable, 
+  LatestInvoiceRaw, User, Revenue} from './definitions';
 import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
@@ -30,6 +35,7 @@ export async function fetchRevenue() {
   }
 }
 
+
 export async function fetchLatestInvoices() {
   noStore();
   try {
@@ -40,10 +46,13 @@ export async function fetchLatestInvoices() {
       ORDER BY invoices.date DESC
       LIMIT 5`;
 
+      // console.log(data,'check')
+
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
       amount: formatCurrency(invoice.amount),
     }));
+    // console.log(latestInvoices, 'check latest invoices')
     return latestInvoices;
   }
   catch (error) {
@@ -51,6 +60,7 @@ export async function fetchLatestInvoices() {
     throw new Error('Failed to fetch the latest invoices.');
   }
 }
+
 
 export async function fetchCardData() {
   noStore();
@@ -92,14 +102,13 @@ export async function fetchCardData() {
 }
 
 
+
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
-  query: string,
-  currentPage: number,
-) {
-  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+export async function fetchFilteredInvoices(query: string, currentPage: number) {
 
   noStore();
+
+  const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
     const invoices = await sql<InvoicesTable>`
@@ -122,13 +131,15 @@ export async function fetchFilteredInvoices(
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-
     return invoices.rows;
+    
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
   }
 }
+
+
 
 export async function fetchInvoicesPages(query: string) {
   noStore();
@@ -152,6 +163,8 @@ export async function fetchInvoicesPages(query: string) {
     throw new Error('Failed to fetch total number of invoices.');
   }
 }
+
+
 
 export async function fetchInvoiceById(id: string) {
   noStore();
@@ -181,6 +194,7 @@ export async function fetchInvoiceById(id: string) {
   }
 }
 
+
 export async function fetchCustomers() {
   noStore();
   try {
@@ -194,11 +208,13 @@ export async function fetchCustomers() {
 
     const customers = data.rows;
     return customers;
+    
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
   }
 }
+
 
 export async function fetchFilteredCustomers(query: string) {
   noStore();

@@ -4,10 +4,10 @@ import {
   UserGroupIcon,
   InboxIcon,
 } from '@heroicons/react/24/outline';
+
 import { lusitana } from '@/app/ui/fonts';
 import { fetchCardData } from '@/app/lib/data';
 
-fetchCardData
 
 const iconMap = {
   collected: BanknotesIcon,
@@ -16,6 +16,8 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
+
+// Card Wrapper component 
 export default async function CardWrapper() {
   const {numberOfCustomers, numberOfInvoices, totalPaidInvoices, totalPendingInvoices} = await fetchCardData();
 
@@ -30,11 +32,9 @@ export default async function CardWrapper() {
   );
 }
 
-export function Card({
-  title,
-  value,
-  type,
-}: {
+
+// Card component
+export function Card({title,value,type,}: {
   title: string;
   value: number | string;
   type: 'invoices' | 'customers' | 'pending' | 'collected';

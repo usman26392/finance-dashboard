@@ -13,12 +13,17 @@ const users = [
     password: '123456',
   },
   {
-    id: '410544b2-4001-4271-9855-fec4b6a6442aa',
+    id: '410544b2-4001-4271-9855-fec4b6a6443a',
     name: 'Usman',
     email: 'usman@mail.com',
     password: 'abc123',
   },
-
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6444a',
+    name: 'farhan',
+    email: 'farhan@mail.com',
+    password: '@abc123@',
+  },
 ];
 
 

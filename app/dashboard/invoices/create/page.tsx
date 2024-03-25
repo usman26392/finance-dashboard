@@ -4,19 +4,21 @@ import { fetchCustomers } from '@/app/lib/data';
  
 export default async function Page() {
   const customers = await fetchCustomers();
+
+  const breadCrumbsArray = [
+    { 
+      label: 'Invoices',
+      href: '/dashboard/invoices' },
+    {
+      label: 'Create Invoice',
+      href: '/dashboard/invoices/create',
+      active: true,
+    },
+  ]
  
   return (
     <main>
-      <Breadcrumbs
-        breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
-          {
-            label: 'Create Invoice',
-            href: '/dashboard/invoices/create',
-            active: true,
-          },
-        ]}
-      />
+      <Breadcrumbs breadcrumbs={breadCrumbsArray}/>
       <Form customers={customers} />
     </main>
   );

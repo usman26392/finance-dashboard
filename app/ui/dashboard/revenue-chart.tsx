@@ -10,7 +10,9 @@ import { fetchRevenue } from '@/app/lib/data';
 // https://airbnb.io/visx/
 
 export default async function RevenueChart() {
-  const revenue = await fetchRevenue(); // Fetch data inside the component
+  // Fetch data moved into the component now due to we are using
+  //  'suspense react component' in to page component.
+  const revenue = await fetchRevenue(); 
 
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);

@@ -7,6 +7,7 @@ import { fetchLatestInvoices } from '@/app/lib/data';
 
 export default async function LatestInvoices() {
   const latestInvoices = await fetchLatestInvoices();
+  // console.log(latestInvoices)
   
   return (
     <div className="flex w-full flex-col md:col-span-4">
@@ -18,10 +19,7 @@ export default async function LatestInvoices() {
         <div className="bg-white px-6">
           {latestInvoices.map((invoice, i) => {
             return (
-              <div
-                key={invoice.id}
-                className={clsx(
-                  'flex flex-row items-center justify-between py-4',
+              <div key={invoice.id} className={clsx('flex flex-row items-center justify-between py-4',
                   {
                     'border-t': i !== 0,
                   },

@@ -1,3 +1,5 @@
+
+
 'use server';
 
 import { sql } from '@vercel/postgres';
@@ -15,6 +17,8 @@ export type State = {
   message?: string | null;
 };
 
+
+// Form schema validation created with the help of zod library.
 const FormSchema = z.object({
   id: z.string(),
   customerId: z.string({
@@ -35,12 +39,16 @@ const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
 // create invoice
 export async function createInvoice(prevState: State, formData: FormData) {
+
   // Validate form using Zod
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
     status: formData.get('status'),
   });
+
+  // Test it out
+  // console.log(validatedFields);
 
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
@@ -54,6 +62,10 @@ export async function createInvoice(prevState: State, formData: FormData) {
   const { customerId, amount, status } = validatedFields.data;
   const amountInCents = amount * 100;
   const date = new Date().toISOString().split('T')[0];
+
+
+  console.log(typeof validatedFields.data.amount)
+
 
   // Insert data into the database
   try {

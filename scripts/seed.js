@@ -1,7 +1,8 @@
 
-// /scripts:  Contains a seeding script that you'll use to populate your database
-// This script contains the instructions for creating and seeding the invoices, customers, user, revenue tables.
-
+// scripts:  Contains a seeding script that you'll use to populate 
+// your database.
+// This script contains the instructions for creating and seeding the invoices,
+//  customers, user, revenue tables.
 
 const { db } = require('@vercel/postgres');
 const { invoices, customers, revenue, users} = require('../app/lib/placeholder-data.js');
