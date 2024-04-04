@@ -4,7 +4,7 @@ import { deleteInvoice } from '@/app/lib/actions';
 
 
 
-
+// create an invoice
 export function CreateInvoice() {
   return (
     <Link
@@ -18,7 +18,7 @@ export function CreateInvoice() {
 }
 
 
-
+// update invoice
 export function UpdateInvoice({ id }: { id: string }) {
   return (
     <Link
@@ -30,6 +30,8 @@ export function UpdateInvoice({ id }: { id: string }) {
   );
 }
 
+
+// delete invoice
 export function DeleteInvoice({ id }: { id: string }) {
   const deleteInvoiceWithId = deleteInvoice.bind(null, id);
 
