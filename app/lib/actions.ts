@@ -9,11 +9,6 @@ import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 
 
-
-
-
-
-
 // This is temporary until @types/react-dom is updated
 export type State = {
   errors?: {

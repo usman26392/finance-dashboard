@@ -81,6 +81,9 @@ export function LatestInvoicesSkeleton() {
   );
 }
 
+
+
+
 export default function DashboardSkeleton() {
   return (
     <>
@@ -98,6 +101,8 @@ export default function DashboardSkeleton() {
     </>
   );
 }
+
+
 
 export function TableRowSkeleton() {
   return (

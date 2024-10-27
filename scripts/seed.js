@@ -8,6 +8,8 @@ const { db } = require('@vercel/postgres');
 const { invoices, customers, revenue, users} = require('../app/lib/placeholder-data.js');
 const bcrypt = require('bcrypt');
 
+// console.log(db)
+
 
 async function seedUsers(client) {
   try {
@@ -150,7 +152,7 @@ async function seedRevenue(client) {
       ),
     );
 
-    console.log(`Seeded ${insertedRevenue.length} revenue`);
+    // console.log(`Seeded ${insertedRevenue.length} revenue`);
 
     return {
       createTable,
@@ -162,6 +164,9 @@ async function seedRevenue(client) {
   }
 }
 
+
+
+
 async function main() {
   const client = await db.connect();
 
@@ -172,6 +177,8 @@ async function main() {
 
   await client.end();
 }
+
+
 
 main().catch((err) => {
   console.error(

@@ -1,6 +1,5 @@
 
 
-
 import { sql } from '@vercel/postgres';
 import { 
   CustomerField, 
@@ -12,11 +11,14 @@ import { formatCurrency } from './utils';
 import { unstable_noStore as noStore } from 'next/cache';
 
 
-export async function fetchRevenue() {
-  // Add noStore() here to prevent the response from being cached.
-  // This is equivalent to in fetch(..., {cache: 'no-store'}).
 
+export async function fetchRevenue() {
+  // Add noStore() here to "prevent" the response from being cached.
+  // This is equivalent to in fetch(..., {cache: 'no-store'}).
   noStore();
+
+  // console.log("check Revenue Data", await sql<Revenue>`SELECT * FROM revenue`);
+
 
   try {
     // Artificially delay a response for demo purposes.
@@ -215,6 +217,8 @@ export async function fetchCustomers() {
     throw new Error('Failed to fetch all customers.');
   }
 }
+
+
 
 
 export async function fetchFilteredCustomers(query: string) {

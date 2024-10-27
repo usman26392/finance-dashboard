@@ -1,9 +1,10 @@
+
 // This file contains 'placeholder data' that you'll be 'replacing' with 'real data' in the Data Fetching chapter:
 // https://nextjs.org/learn/dashboard-app/fetching-data
 
 
 
-// Each JavaScript object in the file represents a table in your database
+// Each JavaScript object in the file represents a 'table' in your database
 
 const users = [
   {
@@ -24,9 +25,15 @@ const users = [
     email: 'farhan@mail.com',
     password: '@abc123@',
   },
+  {
+    id: '410544b2-4001-4271-9855-fec4b6a6244a',
+    name: 'fahad',
+    email: 'fahad@mail.com',
+    password: '@abc123',
+  },
+
+
 ];
-
-
 
 const customers = [
   {
@@ -90,8 +97,6 @@ const customers = [
     image_url: '/customers/balazs-orban.png',
   },
 ];
-
-
 
 const invoices = [
   {
@@ -198,9 +203,11 @@ const revenue = [
   { month: 'Sep', revenue: 2500 },
   { month: 'Oct', revenue: 2800 },
   { month: 'Nov', revenue: 3000 },
-  { month: 'Dec', revenue: 4800 },
+  { month: 'Dec', revenue: 800 },
 ];
 
+
+// exports all my dummy data for seed.js
 module.exports = {
   users,
   customers,

@@ -19,11 +19,9 @@ export const metadata: Metadata = {
 }
 
 
-
-
-
 // This Root layout component will be shared across 'all pages / routes' in application.
 export default function RootLayout({children}: {children: React.ReactNode}) {
+  
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>

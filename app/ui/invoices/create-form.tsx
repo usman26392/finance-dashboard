@@ -1,3 +1,4 @@
+
 'use client';
 import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
@@ -12,9 +13,15 @@ import { Button } from '@/app/ui/button';
 import { createInvoice } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
 
+export default function Form({
+  customersData,
+}: {
+  customersData: CustomerField[];
+}) {
 
+  // console.log('customersData', customersData);
 
-export default function Form({ customers }: { customers: CustomerField[] }) {
+  // initial state
   const initialState = {
     message: null,
     error: {},
@@ -43,7 +50,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
               <option value="" disabled>
                 Select a customer
               </option>
-              {customers.map((customer) => (
+              {customersData.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.name}
                 </option>
@@ -122,7 +129,6 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
             </div>
           </div>
         </fieldset>
-
       </div>
       <div className="mt-6 flex justify-end gap-4">
         <Link

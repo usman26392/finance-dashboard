@@ -13,6 +13,7 @@ export default async function RevenueChart() {
   // Fetch data moved into the component now due to we are using
   //  'suspense react component' in to page component.
   const revenue = await fetchRevenue(); 
+  // console.log(revenue)
 
   const chartHeight = 350;
   const { yAxisLabels, topLabel } = generateYAxis(revenue);
