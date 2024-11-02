@@ -4,20 +4,25 @@ import InvoiceStatus from '@/app/ui/invoices/status';
 import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
+type InvoicesTableProps = {
+  query: string;
+  currentPage: number;
+}
+
+
 export default async function InvoicesTable({
   query,
   currentPage,
-}: {
-  query: string;
-  currentPage: number;
-}) {
+}: InvoicesTableProps ) {
 
   const invoices = await fetchFilteredInvoices(query, currentPage);
+  // console.log("Returned invoices",  invoices)
   
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
+
           {/* layout for mobile devices */}
           <div className="md:hidden">
             {invoices?.map((invoice) => (
@@ -56,6 +61,7 @@ export default async function InvoicesTable({
               </div>
             ))}
           </div>
+
           {/* layout for desktop devices */}
           <table className="hidden min-w-full text-gray-900 md:table">
             <thead className="rounded-lg text-left text-sm font-normal">
@@ -120,6 +126,7 @@ export default async function InvoicesTable({
               ))}
             </tbody>
           </table>
+
         </div>
       </div>
     </div>

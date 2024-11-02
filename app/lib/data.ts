@@ -109,7 +109,6 @@ const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(query: string, currentPage: number) {
 
   noStore();
-
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
   try {
@@ -133,6 +132,8 @@ export async function fetchFilteredInvoices(query: string, currentPage: number) 
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
+    // NOTE: return data in "rows array like { rows: [] }  " from vercel postgres
+    // console.log("check" , invoices); 
     return invoices.rows;
     
   } catch (error) {
@@ -189,7 +190,7 @@ export async function fetchInvoiceById(id: string) {
     }));
 
     // invoice is an empty array[]
-    console.log(invoice); 
+    console.log("invoice", invoice); 
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -210,6 +211,7 @@ export async function fetchCustomers() {
     `;
 
     const customers = data.rows;
+    // console.log("fetch customers data", data);
     return customers;
     
   } catch (err) {

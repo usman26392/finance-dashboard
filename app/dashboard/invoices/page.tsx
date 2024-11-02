@@ -8,34 +8,38 @@ import { Suspense } from 'react';
 import { fetchInvoicesPages } from '@/app/lib/data';
 import { Metadata } from 'next';
 
+
 // export const metadata: Metadata = {
 //   title: "Invoice | Acme Dashboard"
 // }
 
-
-// more enhance
+// NOTE: more enhance
 export const metadata: Metadata = {
   title: "Invoice"
 }
 
 
-
-
-export default async function Page({searchParams}: {
+type searchParamsProps = {
   searchParams?: {
-    query?: string;
+    queryString?: string;
     page?: string;
-  };
-}) {
+  }
+}
 
-  // console.log(searchParams);
 
-  const query = searchParams?.query || "";
+export default async function Page({searchParams}: searchParamsProps ) {
+
+  // server-side, " {searchParams} props"
+  // console.log("Next.js Page props:", searchParams);
+
+  const queryCurrent = searchParams?.queryString || "";
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchInvoicesPages(query);
+  const totalPagesNumber = await fetchInvoicesPages(queryCurrent);
+  // console.log("TotalPages", totalPagesNumber);
 
 
   return (
+    
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
         <h1 className={`${lusitana.className} text-2xl`}>Invoices</h1>
@@ -44,11 +48,13 @@ export default async function Page({searchParams}: {
         <Search Placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+
+      <Suspense key={queryCurrent + currentPage} fallback={<InvoicesTableSkeleton />}>
+        <Table query={queryCurrent} currentPage={currentPage} />
       </Suspense>
+      
       <div className="mt-5 flex w-full justify-center">
-        <Pagination totalPages={totalPages} />
+        <Pagination totalPages={totalPagesNumber} />
       </div>
     </div>
   );

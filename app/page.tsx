@@ -28,7 +28,7 @@ export default function Page() {
           border-r-transparent"/>
           
         {/* triangle shape from custom module css */}
-        <div className={style.shape}></div>
+        {/* <div className={style.shape}></div> */}
 
           <p className={`${lusitana.className}  text-xl text-gray-800 md:text-3xl md:leading-normal`}>
             <strong>Welcome to Acme.</strong> This is the example for the{' '}
