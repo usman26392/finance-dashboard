@@ -132,7 +132,7 @@ export async function fetchFilteredInvoices(query: string, currentPage: number) 
       ORDER BY invoices.date DESC
       LIMIT ${ITEMS_PER_PAGE} OFFSET ${offset}
     `;
-    // NOTE: return data in "rows array like { rows: [] }  " from vercel postgres
+    // NOTE: return data in "rows array like {rows: []} " from vercel postgres.
     // console.log("check" , invoices); 
     return invoices.rows;
     
@@ -173,8 +173,8 @@ export async function fetchInvoiceById(id: string) {
   noStore();
 
   try {
-    const data = await sql<InvoiceForm>`
-      SELECT
+    const data = await sql<InvoiceForm>
+    `SELECT
         invoices.id,
         invoices.customer_id,
         invoices.amount,
@@ -190,13 +190,16 @@ export async function fetchInvoiceById(id: string) {
     }));
 
     // invoice is an empty array[]
-    console.log("invoice", invoice); 
+    // console.log("invoice", invoice); 
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
   }
 }
+
+
+
 
 
 export async function fetchCustomers() {

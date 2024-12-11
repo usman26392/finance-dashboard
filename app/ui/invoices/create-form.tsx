@@ -1,4 +1,3 @@
-
 'use client';
 import { CustomerField } from '@/app/lib/definitions';
 import Link from 'next/link';
@@ -11,28 +10,39 @@ import {
 
 import { Button } from '@/app/ui/button';
 import { createInvoice } from '@/app/lib/actions';
+import { State } from '@/app/lib/actions';
 import { useFormState } from 'react-dom';
+
+
+// NOTE: In React 19: it is using useActionState hook
+// import { useActionState } from 'react';
+// NOTE:
+// ReactDOM.useFormState has been renamed to React.useActionState.
+// Please update Form to use React.useActionState.
 
 export default function Form({
   customersData,
 }: {
   customersData: CustomerField[];
 }) {
-
   // console.log('customersData', customersData);
 
-  // initial state
-  const initialState = {
+  // initial state of our form
+  const initialState:State = {
     message: null,
-    error: {},
+    errors: {},
   };
 
-  const [state, dispatch] = useFormState(createInvoice, initialState);
 
-  // console.log(state);
+  // useFormState hook, useful for managing form state in React applications, 
+  // especially when working with Server Actions in Next.js.
+
+  const [state, formAction] = useFormState<State, FormData>(createInvoice, initialState);
+
+  // console.log("Form errors messages return from the server-side to client-side", state);
 
   return (
-    <form action={dispatch}>
+    <form action={formAction} aria-describedby='create-form'>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
@@ -50,7 +60,7 @@ export default function Form({
               <option value="" disabled>
                 Select a customer
               </option>
-              {customersData.map((customer) => (
+              {customersData?.map((customer) => (
                 <option key={customer.id} value={customer.id}>
                   {customer.name}
                 </option>
@@ -59,14 +69,16 @@ export default function Form({
             <UserCircleIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500" />
           </div>
         </div>
+        {/* for server-side error message */}
         <div id="customer-error" aria-live="polite" aria-atomic="true">
           {state.errors?.customerId &&
             state.errors.customerId.map((error: string) => (
-              <p className="mt-2 text-sm text-red-500" key={error}>
+              <p className="mb-4 mt-1 text-sm text-red-500" key={error}>
                 {error}
               </p>
             ))}
         </div>
+
 
         {/* Invoice Amount */}
         <div className="mb-4">
@@ -76,18 +88,29 @@ export default function Form({
           <div className="relative mt-2 rounded-md">
             <div className="relative">
               <input
+                type="number"
                 id="amount"
                 name="amount"
-                type="number"
                 step="0.01"
                 placeholder="Enter USD amount"
                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                // required
+                // required // simplest client-side validation
+                aria-describedby="customer-amount"
               />
               <CurrencyDollarIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
         </div>
+        {/* for server-side error message */}
+        <div id="customer-amount" aria-live="polite" aria-atomic="true">
+          {state.errors?.amount &&
+            state.errors.amount.map((error: string) => (
+              <p className="mb-4 mt-1 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
+        </div>
+
 
         {/* Invoice Status */}
         <fieldset>
@@ -103,6 +126,7 @@ export default function Form({
                   type="radio"
                   value="pending"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                  aria-describedby='invoice-status'
                 />
                 <label
                   htmlFor="pending"
@@ -118,6 +142,7 @@ export default function Form({
                   type="radio"
                   value="paid"
                   className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
+                  aria-describedby='invoice-status'
                 />
                 <label
                   htmlFor="paid"
@@ -128,8 +153,33 @@ export default function Form({
               </div>
             </div>
           </div>
+
+          {/* for server-side error message */}
+        <div id="invoice-status" aria-live="polite" aria-atomic="true">
+          {state.errors?.status &&
+            state.errors.status.map((error: string) => (
+              <p className="mb-4 mt-1 text-sm text-red-500" key={error}>
+                {error}
+              </p>
+            ))}
+        </div>
+
+
+
         </fieldset>
+
+
+        {/* server-side error message for all fields  */}
+        <div id="create-form" aria-live="polite" aria-atomic="true">
+          {state?.message && (
+            <p className="mb-4 mt-7 text-sm text-red-500">{state?.message}</p>
+          )}
+        </div>
+
+
       </div>
+
+
       <div className="mt-6 flex justify-end gap-4">
         <Link
           href="/dashboard/invoices"

@@ -17,13 +17,15 @@ export default function Breadcrumbs({breadcrumbs}: {breadcrumbs: Breadcrumb[]}) 
     <li
       key={breadcrumb.href}
       aria-current={breadcrumb.active}
-      className={clsx(breadcrumb.active ? 'text-gray-900' : 'text-gray-500')}
+      className={breadcrumb.active ? 'text-gray-900 pointer-events-none' : 'text-gray-500'}
     >
       <Link href={breadcrumb.href}>{breadcrumb.label}</Link>
       {
-        index < breadcrumbs.length - 1 ? (
+        index < breadcrumbs.length - 1 
+        ? (
           <span className="mx-3 inline-block">/</span>
-        ) : null
+        ) 
+        : null
       }
     </li>
   ));

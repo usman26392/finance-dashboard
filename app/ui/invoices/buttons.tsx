@@ -20,6 +20,7 @@ export function CreateInvoice() {
 
 // update invoice
 export function UpdateInvoice({ id }: { id: string }) {
+  // console.log("chexk", id)
   return (
     <Link
       href={`/dashboard/invoices/${id}/edit`}

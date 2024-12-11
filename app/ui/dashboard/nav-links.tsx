@@ -27,6 +27,11 @@ const links = [
     href: '/dashboard/customers',
     icon: UserGroupIcon,
   },
+  {
+    name: 'Users',
+    href: '/dashboard/users',
+    icon: UserGroupIcon,
+  },
 ];
 
 

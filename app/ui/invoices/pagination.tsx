@@ -16,13 +16,16 @@ export default function Pagination({ totalPages }: PaginationProps) {
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  // Get the page number
   const currentPage = Number(searchParams.get('page')) || 1;
   const allPages = generatePagination(currentPage, totalPages);
 
   // console.log("all pages for pagination", allPages);
 
+  // 
   const createPageURL = (pageNumber: number | string)=> {
     const params = new URLSearchParams(searchParams.toString());
+    // set the page URL
     params.set('page', pageNumber.toString());
     return `${pathname}?${params}`;
   };

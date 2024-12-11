@@ -42,6 +42,8 @@ export default function Search({ Placeholder }:SearchProps) {
     // console.log('you entered!', userInput);
     const params = new URLSearchParams(searchParams.toString());
     // console.log('params', params);
+    // when the user types a new search query, you want to reset the page number to 1.
+    params.set("page", "1");
     if (userInput) {
       params.set('queryString', userInput);
     } else {

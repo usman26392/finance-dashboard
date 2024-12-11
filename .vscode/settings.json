@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "ep-lucky-night-a4zwpuxp-pooler.us-east-1.aws.neon.tech",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "Vercel Postgres",
+            "database": "verceldb",
+            "username": "muhammadusman-usman",
+            "connectionTimeout": 15
+        }
+    ]
+}
