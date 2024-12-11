@@ -4,7 +4,7 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-import { signIn } from '@/auth';
+import { signIn } from '@/auth'; // my project's file
 import { AuthError } from 'next-auth';
 
 
@@ -39,14 +39,14 @@ const FormSchema = z.object({
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 // console.log("ye kiya hay  ", CreateInvoice);
-
 // Use Zod to update the expected types
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
+
 
 // create invoice
 export async function createInvoice(prevState: State, formData: FormData) {
 
-  // Validate form using Zod
+  // Validate using Zod
   // console.log("formData", formData)
   const validatedFields = CreateInvoice.safeParse({
     customerId: formData.get('customerId'),
@@ -55,7 +55,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   });
 
   // Test it out
-  console.log(validatedFields);
+  // console.log(validatedFields);
 
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
@@ -97,7 +97,6 @@ export async function createInvoice(prevState: State, formData: FormData) {
 }
 
 
-
 // update invoice
 export async function updateInvoice(id: string, prevState: State, formData: FormData) {
   
@@ -132,7 +131,6 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
 }
 
 
-
 // delete invoice
 export async function deleteInvoice(id: string) {
   // you can check error.tsx file for uncomment this below statement.
@@ -155,13 +153,11 @@ export async function deleteInvoice(id: string) {
 
 
 // action for login form
-export async function authenticate(
-  prevState: string | undefined,
-  formData: FormData,
-) {
+export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);
-  } catch (error) {
+  } 
+  catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':

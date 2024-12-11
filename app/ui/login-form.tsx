@@ -1,7 +1,4 @@
-
 'use client';
-
-
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
@@ -13,14 +10,11 @@ import { Button } from './button';
 import { useFormState, useFormStatus } from 'react-dom';
 import { authenticate } from '@/app/lib/actions';
 
-
-
-
 export default function LoginForm() {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-  
+  const [errorMessage, formAction] = useFormState(authenticate, undefined);
+
   return (
-    <form action={dispatch} className="space-y-3">
+    <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
@@ -83,7 +77,6 @@ export default function LoginForm() {
     </form>
   );
 }
-
 
 function LoginButton() {
   const { pending } = useFormStatus();
