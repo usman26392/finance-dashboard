@@ -7,7 +7,6 @@ import { z } from 'zod';
 import { signIn } from '@/auth'; // my project's file
 import { AuthError } from 'next-auth';
 
-
 // This is temporary until @types/react-dom is updated
 export type State = {
   errors?: {
@@ -45,7 +44,6 @@ const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 
 // create invoice
 export async function createInvoice(prevState: State, formData: FormData) {
-
   // Validate using Zod
   // console.log("formData", formData)
   const validatedFields = CreateInvoice.safeParse({
@@ -64,7 +62,6 @@ export async function createInvoice(prevState: State, formData: FormData) {
       message: 'Missing Fields. Failed to Create Invoice.',
     };
   }
-  
 
   // Prepare data for insertion into the database
   const { customerId, amount, status } = validatedFields.data;
@@ -74,9 +71,7 @@ export async function createInvoice(prevState: State, formData: FormData) {
   // creating new dates for invoices creation date
   const date = new Date().toISOString().split('T')[0];
 
-
   // console.log(typeof validatedFields.data.amount)
-
 
   // Insert data into the database
   try {
@@ -96,10 +91,8 @@ export async function createInvoice(prevState: State, formData: FormData) {
   redirect('/dashboard/invoices'); // redirect to the invoices page.
 }
 
-
 // update invoice
 export async function updateInvoice(id: string, prevState: State, formData: FormData) {
-  
   const validatedFields = UpdateInvoice.safeParse({
     customerId: formData.get('customerId'),
     amount: formData.get('amount'),
@@ -130,7 +123,6 @@ export async function updateInvoice(id: string, prevState: State, formData: Form
   redirect('/dashboard/invoices');
 }
 
-
 // delete invoice
 export async function deleteInvoice(id: string) {
   // you can check error.tsx file for uncomment this below statement.
@@ -156,8 +148,7 @@ export async function deleteInvoice(id: string) {
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);
-  } 
-  catch (error) {
+  } catch (error) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case 'CredentialsSignin':
