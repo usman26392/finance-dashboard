@@ -14,6 +14,9 @@ npm run seed
 npm run lint
 
 
+
+
+
 # for login
 usman@mail.com
 abc123
