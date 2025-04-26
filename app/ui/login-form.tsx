@@ -76,10 +76,10 @@ export default function LoginForm() {
         <div className="border-t border-gray-200 pt-2">
             <p className="text-sm text-gray-500">For login Credential</p>
             <p className="text-sm text-gray-500">
-              Email: <strong>usman@mail.com</strong>
+              Email: <strong>dummy@mail.com</strong>
             </p>
             <p className="text-sm text-gray-500">
-              Password: <strong>abc123</strong>
+              Password: <strong>@123new@@</strong>
             </p>
           </div>
       </div>
