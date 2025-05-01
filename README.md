@@ -16,7 +16,3 @@ npm run lint
 
 
 
-
-# for login
-usman@mail.com
-abc123
